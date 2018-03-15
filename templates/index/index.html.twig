@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Task manager{% endblock %}
+
+{% block body %}
+
+        <div class="row" style="margin-top: 20%">
+            <div class="col-lg-2 col-lg-push-5">
+                <a class="btn btn-default" href="{{ path('login') }}" role="button" style="width:100%; text-align: center;">
+                    Login
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-2 col-lg-push-5">
+                <a class="btn btn-default" href="{{ path('register') }}" role="button" style="width:100%; text-align: center;">
+                    Register
+                </a>
+            </div>
+        </div>
+
+
+
+{% endblock %}

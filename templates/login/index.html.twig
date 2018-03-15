@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Task manager{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-lg-2 col-lg-push-5">
+            Login
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 col-lg-push-4">
+
+            {% if error %}
+                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            {{ form_start(form, {'action': path('login'), 'method': 'POST'}) }}
+                {{ form_label(form._username) }}
+                {{ form_widget(form._username, { 'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form._username) }}
+
+                {{ form_label(form._password) }}
+                {{ form_widget(form._password, { 'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form._password) }}
+
+                 <button type="submit" class="btn btn-default">Submit</button>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+
+
+{% endblock %}

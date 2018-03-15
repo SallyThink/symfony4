@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Task manager{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-lg-2 col-lg-push-5">
+            <a class="btn btn-default" href="{{ path('task_store') }}" role="button" style="width:100%; text-align: center;">
+                Create new task
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 col-lg-push-3">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>name</th>
+                        <th>status</th>
+                        <th>Max comment length</th>
+                        <th>Max comment author</th>
+                        <th>Edit link</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for task in tasks %}
+                        <tr>
+                            <td>{{ task.0.id }}</td>
+                            <td>
+                                <a href="{{ path('task_show', {'task': task.0.id}) }}">{{ task.0.name }}</a>
+                            </td>
+                            <td>{{ task.0.status }}</td>
+                            {% if task.comment_max_length %}
+                                <td>{{ task.comment_max_length }}</td>
+                                <td>{{ task.user_email }}</td>
+                            {% else %}
+                                <td>No comments</td>
+                                <td>No comments</td>
+                            {% endif %}
+                            <td>
+                                <a class="btn btn-default" href="{{ path('task_update', {'task': task.0.id}) }}" role="button" style="width:100%; text-align: center;">
+                                    Edit
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
