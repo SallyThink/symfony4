@@ -78,8 +78,9 @@ class TaskController extends Controller
             'action' => $this->generateUrl('task_update', ['task' => $task->getId()]),
             'method' => 'PUT',
         ]);
-
         $form->handleRequest($request);
+
+        $statusCode = 200;
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -92,11 +93,13 @@ class TaskController extends Controller
             return $this->redirectToRoute('task_show', [
                 'task' => $task->getId(),
             ]);
+        } elseif ($request->isMethod('PUT')) {
+            $statusCode = 422;
         }
 
         return $this->render('task/form.html.twig', [
             'form' => $form->createView(),
-        ]);
+        ])->setStatusCode($statusCode);
     }
 
     /**

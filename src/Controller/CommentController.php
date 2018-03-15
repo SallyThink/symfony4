@@ -27,7 +27,11 @@ class CommentController extends Controller
         $form = $this->createForm(CommentForm::class, $comment);
         $form->handleRequest($request);
 
+        $statusCode = 422;
+
         if ($form->isSubmitted() && $form->isValid()) {
+            $statusCode = 200;
+
             $comment->setUser($this->getUser());
             $comment->setTask($task);
 
@@ -40,6 +44,6 @@ class CommentController extends Controller
 
         return $this->redirectToRoute('task_show', [
             'task' => $task->getId(),
-        ]);
+        ])->setStatusCode($statusCode);
     }
 }
